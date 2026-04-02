@@ -3,91 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MYTUBE - 성수동 핫플 정복!</title>
+    <title>MYTUBE - 성수동 핫플</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Roboto', 'Noto Sans KR', sans-serif; background-color: #fff; color: #0f0f0f; overflow-x: hidden; }
+        body { font-family: 'Roboto', sans-serif; background-color: #f9f9f9; color: #0f0f0f; }
 
-        /* [1] 랜딩 페이지 스타일 - 배경 이미지 제거 버전 */
+        /* [1] 랜딩 페이지 */
         #landing-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            /* 세련된 다크 그레이 그라데이션으로 대체 */
             background: linear-gradient(135deg, #1e1e1e 0%, #111111 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 10000; color: #fff; text-align: center; padding: 20px;
         }
-        .landing-img { width: 180px; height: auto; margin-bottom: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .landing-msg { font-size: 19px; line-height: 1.7; margin-bottom: 35px; font-weight: 500; color: #eeeeee; }
+        .landing-img { width: 180px; height: auto; margin-bottom: 25px; border-radius: 15px; }
         .btn-start { 
             background-color: #00a2ff; color: #fff; border: none; padding: 18px 60px; 
-            font-size: 19px; font-weight: 700; border-radius: 50px; cursor: pointer; 
-            transition: all 0.3s ease; box-shadow: 0 5px 20px rgba(0,162,255,0.4);
+            font-size: 19px; font-weight: 700; border-radius: 50px; cursor: pointer; transition: 0.3s;
         }
-        .btn-start:hover { transform: translateY(-3px); background-color: #008be2; box-shadow: 0 8px 25px rgba(0,162,255,0.6); }
 
-        /* [2] 메인 앱 컨테이너 */
+        /* [2] 메인 앱 구조 */
         .app-container { display: none; width: 100%; min-height: 100vh; padding-top: 56px; }
 
-        /* 헤더 스타일 */
-        .header { position: fixed; top: 0; left: 0; width: 100%; height: 56px; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid #f0f0f0; z-index: 1000; }
-        .logo-text { font-size: 20px; font-weight: 900; color: #FF0000; letter-spacing: -1px; }
+        /* 헤더 & 프로필 영역 */
+        .header { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 56px; 
+            background: #fff; display: flex; align-items: center; justify-content: space-between; 
+            padding: 0 16px; border-bottom: 1px solid #eee; z-index: 1000; 
+        }
+        .logo-text { font-size: 20px; font-weight: 900; color: #FF0000; }
         
+        /* 프로필 아이콘 스타일 */
+        .user-profile {
+            width: 32px; height: 32px; border-radius: 50%; overflow: hidden;
+            cursor: pointer; border: 1px solid #ddd;
+        }
+        .user-profile img { width: 100%; height: 100%; object-fit: cover; }
+
         /* 비디오 그리드 */
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; padding: 25px; }
-        .video-card { text-decoration: none; color: inherit; display: block; transition: transform 0.2s; }
-        .video-card:hover { transform: translateY(-5px); }
-        .thumb-box { width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #f0f0f0; margin-bottom: 12px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding: 20px; }
+        .video-card { text-decoration: none; color: inherit; display: block; }
+        .thumb-box { width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #eee; margin-bottom: 8px; }
         .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
-        .v-title { font-size: 16px; font-weight: 600; line-height: 1.4; color: #0f0f0f; }
+        .v-title { font-size: 15px; font-weight: 600; line-height: 1.4; }
     </style>
 </head>
 <body>
 
     <div id="landing-overlay">
-        <img src="./image_4.png" alt="성수동 가이드" class="landing-img" onerror="this.src='https://via.placeholder.com/200x150?text=SEOUNGSU'">
-        <p class="landing-msg">
-            성수동의 숨겨진 핫플이 궁금하신가요?🔥<br>
-            가장 보고 싶은 영상을 선택해 정보를 확인해보세요.
-        </p>
+        <img src="./image_4.png" alt="Logo" class="landing-img" onerror="this.src='https://via.placeholder.com/180x130?text=LOGO'">
+        <p style="margin-bottom:30px;">성수동 핫플 정보를 확인해보세요!🔥</p>
         <button class="btn-start" onclick="startApp()">시작하기</button>
     </div>
 
     <div id="page-A" class="app-container">
-        <header class="header"><div class="logo-text">MYTUBE</div></header>
+        <header class="header">
+            <div class="logo-text">MYTUBE</div>
+            <div class="user-profile" onclick="alert('프로필이 클릭되었습니다!')">
+                <img src="./image_3.png" alt="Profile" onerror="this.src='https://via.placeholder.com/32?text=U'">
+            </div>
+        </header>
         <main class="video-grid">
-            <a href="#" class="video-card">
-                <div class="thumb-box"><img src="./image_1.png" alt="vlog1"></div>
-                <div class="v-title">성수동 브이로그 - 꼭 가봐야 할 핫플 모음</div>
-            </a>
-            <a href="#" class="video-card">
-                <div class="thumb-box"><img src="./image_2.png" alt="vlog2"></div>
-                <div class="v-title">디올 성수부터 하우스 노웨어까지 완벽 정복</div>
-            </a>
+            <div class="video-card">
+                <div class="thumb-box"><img src="./image_1.png" alt="v1"></div>
+                <div class="v-title">성수동 브이로그 - 기본 썸네일 A</div>
+            </div>
+            <div class="video-card">
+                <div class="thumb-box"><img src="./image_2.png" alt="v2"></div>
+                <div class="v-title">디올 성수 하우스 노웨어 정복</div>
+            </div>
         </main>
     </div>
 
     <div id="page-B" class="app-container">
-        <header class="header"><div class="logo-text">MYTUBE</div></header>
+        <header class="header">
+            <div class="logo-text">MYTUBE</div>
+            <div class="user-profile" onclick="alert('프로필이 클릭되었습니다!')">
+                <img src="./image_3.png" alt="Profile" onerror="this.src='https://via.placeholder.com/32?text=U'">
+            </div>
+        </header>
         <main class="video-grid">
-            <a href="#" class="video-card">
-                <div class="thumb-box"><img src="./image_5.png" alt="vlog3"></div>
-                <div class="v-title">성수동 핫플 브이로그 (업데이트 버전)</div>
-            </a>
-            <a href="#" class="video-card">
-                <div class="thumb-box"><img src="./image_2.png" alt="vlog2"></div>
-                <div class="v-title">디올 성수부터 하우스 노웨어까지 완벽 정복</div>
-            </a>
+            <div class="video-card">
+                <div class="thumb-box"><img src="./image_5.png" alt="v3"></div>
+                <div class="v-title">성수동 브이로그 - 실험 썸네일 B</div>
+            </div>
+            <div class="video-card">
+                <div class="thumb-box"><img src="./image_2.png" alt="v2"></div>
+                <div class="v-title">디올 성수 하우스 노웨어 정복</div>
+            </div>
         </main>
     </div>
 
     <script>
         function startApp() {
-            const overlay = document.getElementById('landing-overlay');
-            overlay.style.display = 'none';
-            // 기본적으로 Page A를 보여줌 (VWO 실험군일 경우 VWO가 자바스크립트로 B로 교체)
+            document.getElementById('landing-overlay').style.display = 'none';
+            // 기본값은 Page A 노출
             document.getElementById('page-A').style.display = 'block';
         }
     </script>
