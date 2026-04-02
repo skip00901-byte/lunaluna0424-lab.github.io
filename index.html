@@ -1,0 +1,22 @@
+<script>
+    function toggleSidebar(type) {
+        const side = document.getElementById('sidebar-' + type);
+        if(side) side.classList.toggle('open');
+    }
+
+    function startRandomExperiment() {
+        const overlay = document.getElementById('landing-overlay');
+        overlay.style.opacity = '0';
+        
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            
+            // [수정] 랜덤 로직을 제거하고 기본적으로 page-A를 보여줍니다.
+            // VWO 실험이 시작되면 VWO가 이 화면을 강제로 page-B로 바꿀 것입니다.
+            document.getElementById('page-A').style.display = 'block';
+            document.getElementById('page-B').style.display = 'none';
+            
+            window.scrollTo(0, 0);
+        }, 500);
+    }
+</script>
